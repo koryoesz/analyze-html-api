@@ -2,7 +2,7 @@
 
 ## Features
 
-- Upload an HTML file and get all analysis around the file at a glance
+- Upload an HTML file and get all accessibility issues
 
 ## Installation
 
