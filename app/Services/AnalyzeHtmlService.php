@@ -120,7 +120,7 @@ class AnalyzeHtmlService implements IAnalyzeHtmlRepository
             throw new HttpResponseException(HttpResponse::errorResponse([], 'Error encountered while crawling the file passed.'));
         }
         
-    
+        Log::info('Analysis done', $issueDetail);
         return [
             'details'   => $issueDetail,
             'score' => max($score, 0),
