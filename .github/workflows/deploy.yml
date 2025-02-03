@@ -29,11 +29,13 @@ jobs:
           echo "${{ secrets.GCP_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.GCP_SERVER_IP }} >> ~/.ssh/known_hosts
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
 
       - name: Deploy via SSH
         run: |
           ssh ubuntu@${{ secrets.GCP_SERVER_IP }} << 'EOF'
-            cd /var/www/your-laravel-project
+            cd /var/www/analyze-html-api
             git pull origin $(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
             composer install --no-dev --prefer-dist --no-progress --no-interaction
             php artisan migrate --force
